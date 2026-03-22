@@ -35,7 +35,18 @@ def delete_task(index):
         print(f"Deleted: {removed['task']}")
     else:
         print("Invalid task number")
-        
+
+def edit_task(index, new_task):
+    tasks = load_tasks()
+
+    if 0 <= index < len(tasks):
+        tasks[index]["task"] = new_task
+        tasks[index]["priority"] = predict_priority(new_task)
+        save_tasks(tasks)
+        print("Task updated")
+    else:
+        print("Invalid task number")
+
 def list_tasks():
     tasks = load_tasks()
     for i, t in enumerate(tasks):
