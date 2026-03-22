@@ -4,11 +4,11 @@
         "priority": "Medium"
     },
     {
-        "task": "second",
-        "priority": "Medium"
+        "task": "later task",
+        "priority": "Low"
     },
     {
-        "task": "urgent",
+        "task": "asap task",
         "priority": "High"
     }
 ]

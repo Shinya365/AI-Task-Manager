@@ -1,4 +1,4 @@
-from src.task_manager import add_task, list_tasks
+from src.task_manager import add_task, list_tasks, delete_task, edit_task
 
 while True:
     print("\n1. Add Task")
@@ -26,6 +26,6 @@ while True:
         index = int(input("Enter task number to edit: ")) - 1
         new_task = input("Enter new task: ")
         edit_task(index, new_task)
-        
+
     elif choice == "5":
         break
