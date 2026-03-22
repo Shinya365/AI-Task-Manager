@@ -1,7 +1,7 @@
 import json
 from model.model import predict_priority
 
-FILE = "data/tasks.json"
+FILE = "../data/tasks.json"
 
 def load_tasks():
     try:
