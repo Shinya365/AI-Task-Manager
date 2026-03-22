@@ -26,6 +26,16 @@ def add_task(task):
 
     save_tasks(tasks)
 
+def delete_task(index):
+    tasks = load_tasks()
+
+    if 0 <= index < len(tasks):
+        removed = tasks.pop(index)
+        save_tasks(tasks)
+        print(f"Deleted: {removed['task']}")
+    else:
+        print("Invalid task number")
+        
 def list_tasks():
     tasks = load_tasks()
     for i, t in enumerate(tasks):
