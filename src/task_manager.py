@@ -1,4 +1,5 @@
 import json
+from model.model import predict_priority
 
 FILE = "data/tasks.json"
 
@@ -15,10 +16,17 @@ def save_tasks(tasks):
 
 def add_task(task):
     tasks = load_tasks()
-    tasks.append({"tasks": task, "priority": None})
+    priority = predict_priority(task)
+    #tasks.append({"tasks": task, "priority": None})
+    
+    tasks.append({
+        "task": task,
+        "priority": priority
+    })
+
     save_tasks(tasks)
 
 def list_tasks():
     tasks = load_tasks()
     for i, t in enumerate(tasks):
-        print(f"{i+1}. {t['tasks']} (Priority: {t['priority']})")
+        print(f"{i+1}. {t['task']} (Priority: {t['priority']})")
