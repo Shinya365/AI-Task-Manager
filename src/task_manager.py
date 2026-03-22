@@ -1,54 +1,36 @@
-import json
-from model.model import predict_priority
+import sqlite3
 
+<<<<<<< HEAD
 FILE = "../data/tasks.json"
+=======
+conn = sqlite3.connect("data/database.db", check_same_thread=false)
+cursor = conn.cursor()
+>>>>>>> feature/database
 
-def load_tasks():
-    try:
-        with open(FILE, "r") as f:
-            return json.load(f)
-    except:
-        return []
-
-def save_tasks(tasks):
-    with open(FILE, "w") as f:
-        json.dump(tasks, f, indent=4)
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS task (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    task TEXT,
+    priority TEXT
+)
+""")
+conn.commit()
 
 def add_task(task):
-    tasks = load_tasks()
     priority = predict_priority(task)
-    #tasks.append({"tasks": task, "priority": None})
-    
-    tasks.append({
-        "task": task,
-        "priority": priority
-    })
-
-    save_tasks(tasks)
-
-def delete_task(index):
-    tasks = load_tasks()
-
-    if 0 <= index < len(tasks):
-        removed = tasks.pop(index)
-        save_tasks(tasks)
-        print(f"Deleted: {removed['task']}")
-    else:
-        print("Invalid task number")
-
-def edit_task(index, new_task):
-    tasks = load_tasks()
-
-    if 0 <= index < len(tasks):
-        tasks[index]["task"] = new_task
-        tasks[index]["priority"] = predict_priority(new_task)
-        save_tasks(tasks)
-        print("Task updated")
-    else:
-        print("Invalid task number")
+    cursor.execute("INSERT INTO tasks(task, priority) VALUES (?, ?)", (task, priority))
+    conn.commit()
 
 def list_tasks():
-    #tasks = load_tasks()
-    #for i, t in enumerate(tasks):
-    #    print(f"{i+1}. {t['task']} (Priority: {t['priority']})")
-    return load_tasks()
+    cursor.execute("SELECT * FROM tasks")
+    return cursor.fetchall()
+
+def delete_task(index):
+    cursor.execute("DELETE FROM tasks WHERE id=?", (index,))
+    conn.commit()
+
+def edit_task(index, new_task):
+    priority = predict_priority(new_task)
+    cursor.execute("UPDATE tasks SET task=?, priority=? WHERE id=?", (new_task, priority, index))
+    conn.commit()
+    

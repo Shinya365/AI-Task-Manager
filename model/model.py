@@ -1,10 +1,8 @@
-def predict_priority(task):
-    task = task.lower()
+import pickle
 
-    if "urgent" in task or "asap" in task:
-        return "High"
-    elif "later" in task:
-        return "Low"
-    else:
-        return "Medium"
-        
+model = pickle.load(open("model.pkl", "rb"))
+vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
+
+def predict_priority(task):
+    vec = vectorizer.transform([task])
+    return model.predict(vec)[0]
