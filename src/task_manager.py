@@ -48,6 +48,7 @@ def edit_task(index, new_task):
         print("Invalid task number")
 
 def list_tasks():
-    tasks = load_tasks()
-    for i, t in enumerate(tasks):
-        print(f"{i+1}. {t['task']} (Priority: {t['priority']})")
+    #tasks = load_tasks()
+    #for i, t in enumerate(tasks):
+    #    print(f"{i+1}. {t['task']} (Priority: {t['priority']})")
+    return load_tasks()
