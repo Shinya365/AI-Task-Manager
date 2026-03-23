@@ -1,5 +1,6 @@
 import os
 import sqlite3
+from model.model import predict_priority
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 db_path = os.path.join(BASE_DIR, "data", "database.db")
@@ -8,7 +9,7 @@ conn = sqlite3.connect(db_path, check_same_thread=False)
 cursor = conn.cursor()
 
 cursor.execute("""
-CREATE TABLE IF NOT EXISTS task (
+CREATE TABLE IF NOT EXISTS tasks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     task TEXT,
     priority TEXT
