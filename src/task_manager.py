@@ -1,11 +1,7 @@
 import sqlite3
 
-<<<<<<< HEAD
-FILE = "../data/tasks.json"
-=======
 conn = sqlite3.connect("data/database.db", check_same_thread=false)
 cursor = conn.cursor()
->>>>>>> feature/database
 
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS task (
