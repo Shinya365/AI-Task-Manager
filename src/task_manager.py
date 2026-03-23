@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect("data/database.db", check_same_thread=false)
+conn = sqlite3.connect("../data/database.db", check_same_thread=false)
 cursor = conn.cursor()
 
 cursor.execute("""
