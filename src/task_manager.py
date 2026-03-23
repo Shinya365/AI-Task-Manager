@@ -1,6 +1,9 @@
 import sqlite3
 
-conn = sqlite3.connect("../data/database.db", check_same_thread=false)
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+db_path = os.path.join(BASE_DIR, "data", "database.db")
+
+conn = sqlite3.connect(db_path, check_same_thread=False)
 cursor = conn.cursor()
 
 cursor.execute("""
